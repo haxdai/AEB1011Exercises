@@ -1,0 +1,13 @@
+{
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.3.2",
+    "ionic-material": "^0.4.2",
+    "ion-md-input": "^1.0.4",
+    "ngCordova": "^0.1.27-alpha"
+  },
+  "dependencies": {
+    "cryptojslib": "^3.1.2"
+  }
+}

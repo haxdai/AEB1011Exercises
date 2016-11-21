@@ -1,0 +1,14 @@
+<ion-view view-title="Contactos">
+    <ion-content ng-class="{expanded:isExpanded}">
+        <div class="content has-header">
+            <ion-list class="animate animate-ripple">
+                <ion-item ng-repeat="contact in contacts" href="#/app/profile" class="item item-avatar item-icon-right">
+                    <img ng-src="img/{{contact.picture}}">
+                    <h3>{{contact.name}}</h3>
+                    <p>{{contact.jobTitle}}</p>
+                    <i class="icon ion-chevron-right muted"></i>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link href='https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic' rel='stylesheet' type='text/css'>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/ion-md-input/css/ion-md-input.min.css" rel="stylesheet">
+    <link href="lib/ionic-material/dist/ionic.material.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
+    <script src="lib/ion-md-input/js/ion-md-input.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="cordova.js"></script>
+    <!-- third party dependencies -->
+    <script src="lib/cryptojslib/rollups/md5.js"></script>
+    <script src="lib/cryptojslib/rollups/aes.js"></script>
+    <script src="lib/cryptojslib/components/enc-base64-min.js"></script>
+    <!-- app providers -->
+    <script src="js/crypto.module.js"></script>
+    <script src="js/providers/crypto.provider.js"></script>
+    <!-- app services -->
+    <script src="js/service.module.js"></script>
+    <script src="js/services/contact.service.js"></script>
+    <script src="js/services/user.service.js"></script>
+    <!-- app controllers -->
+    <script src="js/app.module.js"></script>
+    <script src="js/controllers/starter.controller.js"></script>
+    <script src="js/controllers/app.controller.js"></script>
+    <script src="js/controllers/login.controller.js"></script>
+    <script src="js/controllers/friends.controller.js"></script>
+    <script src="js/controllers/profile.controller.js"></script>
+    <script src="js/controllers/activity.controller.js"></script>
+    <script src="js/controllers/gallery.controller.js"></script>
+    <script src="js/route-config.js"></script>
+</head>
+<body ng-app="Contacts">
+    <ion-nav-view></ion-nav-view>
+</body>
+</html>

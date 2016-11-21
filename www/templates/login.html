@@ -1,0 +1,23 @@
+<ion-view view-title="Login" align-title="left">
+    <ion-content class="login-background">
+        <div class="login-content">
+            <div class="hero no-header flat">
+                <img src="img/contacts-icon.png" style="width:100px;"/>
+            </div>
+            <div class="list">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Usuario</span>
+                    <input type="text" placeholder="Usuario" ng-model="loginData.username">
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Password</span>
+                    <input type="password" placeholder="Password" ng-model="loginData.password">
+                </label>
+            </div>
+            <div class="padding">
+                <button ng-click="login()" class="button button-full button-balanced ink">Entrar</button>
+            </div>
+            <p class="login-footer">No tienes una cuenta? <a ui-sref="app.signup">Crea una aquí</a></p>
+        </div>
+    </ion-content>
+</ion-view>
