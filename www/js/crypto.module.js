@@ -2,5 +2,6 @@
   'use strict';
 
   angular
-    .module('mdo-angular-cryptography', []);
+    .module('Contacts.crypto', []); //CryptoJS module definition
+    
 })();

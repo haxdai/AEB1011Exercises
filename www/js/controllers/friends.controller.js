@@ -1,32 +1,25 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('Contacts.controllers')
-        .controller('FriendsCtrl', FriendsController);
+  angular
+    .module('Contacts.controllers') //On module Contacts.controllers
+    .controller('FriendsCtrl', FriendsController); //Define FriendsCtrl
 
-    FriendsController.$inject = ["$scope", "$stateParams", "$timeout", "ionicMaterialInk", "ionicMaterialMotion", "ContactsManager"];
-    function FriendsController($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, ContactsManager) {
-        //Calls showHeader from parent controller to show top navbar
-        $scope.$parent.showHeader();
-        //Calls clearFabs from parent controller to hide buttons in fabs
-        $scope.$parent.clearFabs();
-        //Calls setHeaderFab from parent controller to adjust header fab position variables
-        $scope.$parent.setHeaderFab('left');
-        //Defines an array of object for contact info
-        $scope.contacts = ContactsManager.getContacts();//[{picture:"jon-snow.jpg", name: "Jon Snow", jobTitle:"Da illest illegitimate"}, {picture:"daenerys.jpg", name: "Daenerys Targaryen", jobTitle:"Dragon mommy"}, {picture:"jon-snow.jpg", name: "Jon Snow", jobTitle:"Da illest illegitimate"}];
+  FriendsController.$inject = ["$scope", "$stateParams", "$timeout", "ionicMaterialInk", "ionicMaterialMotion", "ContactsManager"];
+  function FriendsController($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, ContactsManager) {
+    $scope.$parent.showHeader(); //show top navbar
+    $scope.$parent.clearFabs(); //hide buttons in fabs
+    $scope.$parent.setHeaderFab('left'); //adjust header fab position flags
 
-        // Delay expansion and animations
-        $timeout(function() {
-            //Expand content
-            $scope.isExpanded = true;
-            $scope.$parent.setExpanded(true);
-            // Set Motion
-            ionicMaterialMotion.ripple();
+    $scope.contacts = ContactsManager.getContacts(); //Get contacts from database using ContactsManager service
 
-            // Set Ink
-            ionicMaterialInk.displayEffect();
-        }, 200);
-    };
+    // Delay expansion and animations (workaround to contacts not displaying)
+    $timeout(function() {
+      $scope.isExpanded = true; //Expand content
+      $scope.$parent.setExpanded(true);
+      ionicMaterialMotion.ripple(); // Set Motion
+      ionicMaterialInk.displayEffect(); // Set Ink
+    }, 200);
+  };
 
 })();

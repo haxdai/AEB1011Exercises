@@ -1,50 +1,61 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('Contacts.services')
-        .factory("ContactsManager", ContactsManager);
+  angular
+    .module('Contacts.services') //On module Contacts.services
+    .factory("ContactsManager", ContactsManager); //Define ContactsManager service
 
-    ContactsManager.$inject = ["$rootScope", "$http", "$q", "$cordovaSQLite"];
-    function ContactsManager ($rootScope, $http, $q, $cordovaSQLite) {
+  ContactsManager.$inject = ["$rootScope", "$http", "$q", "$cordovaSQLite"];
+  function ContactsManager ($rootScope, $http, $q, $cordovaSQLite) {
 
-      var factory = {
-        getContacts: getContacts,
-        addContact: addContact,
-        removeContact: removeContact
-      };
+    //Service contract definition
+    var factory = {
+      getContacts: getContacts,
+      addContact: addContact,
+      removeContact: removeContact
+    };
 
-      return factory;
+    //Return service contract object
+    return factory;
 
-      function getContacts() {
-        var deferred = $q.defer(), query = "SELECT * FROM contacts";
+    //Get contacts from database
+    function getContacts() {
+      var deferred = $q.defer(), //Deferred object
+          query = "SELECT * FROM contacts"; //SQL query
 
-        $cordovaSQLite.execute($rootScope.db, query, []).then(function(res) {
-            var result = getAllContacts(res);
-            deferred.resolve(result);
+      //Execute query
+      $cordovaSQLite.execute($rootScope.db, query, [])
+        .then(function(res) {
+            var result = getAllContacts(res); //Get contacts array
+            deferred.resolve(result); //Resolve with contact data
         })
         .catch(function (res) {
           deferred.resolve(res);
         });
 
-        return deferred.promise;
-      };
+      //Return deferred promise
+      return deferred.promise;
+    };
 
-      function addContact(contactInfo) {
+    //Add contact to database
+    function addContact(contactInfo) {
 
-      };
+    };
 
-      function removeContact(contactId) {
+    //Delete contact from database
+    function removeContact(contactId) {
 
-      };
+    };
 
-      function getAllContacts(result) {
-        var ret = [];
-        for (var i = 0; i < result.rows.length; i++) {
-          ret.push(result.rows.item(i));
-        }
+    //Helper function to get an array of contacts
+    function getAllContacts(result) {
+      var ret = [];
+      for (var i = 0; i < result.rows.length; i++) {
+        ret.push(result.rows.item(i));
+      }
 
-        return ret;
-      };
+      return ret;
+    };
+
     };
 })();

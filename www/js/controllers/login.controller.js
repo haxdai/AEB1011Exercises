@@ -1,60 +1,60 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('Contacts.controllers')
-        .controller('LoginCtrl', LoginController);
+  angular
+    .module('Contacts.controllers') //On module Contacts.controllers
+    .controller('LoginCtrl', LoginController); //Define LoginCtrl controller
 
-    LoginController.$inject = ["$scope", "$rootScope", "$timeout", "$state", "$stateParams", "ionicMaterialInk", "UsersManager"];
-    function LoginController($scope, $rootScope, $timeout, $state, $stateParams, ionicMaterialInk, UsersManager) {
-      //Variable to store login credentials
-      $scope.loginData = {};
-      $scope.userData = {};
+  LoginController.$inject = ["$scope", "$rootScope", "$timeout", "$state", "$stateParams", "ionicMaterialInk", "UsersManager"];
+  function LoginController($scope, $rootScope, $timeout, $state, $stateParams, ionicMaterialInk, UsersManager) {
+    $scope.loginData = {}; //Object to store login credentials
+    $scope.userData = {}; //Object to store louser data
 
-      //Calls clearFabs from parent controller to hide fab buttons
-      $scope.$parent.clearFabs();
+    $scope.$parent.clearFabs(); //hide fab buttons
 
-      //Hide header bar
-      $timeout(function() {
-          $scope.$parent.hideHeader();
-      });
+    $timeout(function() {
+      $scope.$parent.hideHeader(); //Hide header bar
+    });
 
-      //Activate effects for view elements
-      ionicMaterialInk.displayEffect();
+    ionicMaterialInk.displayEffect(); //Activate effects for view elements
 
-      //Login function
-      $scope.login = function () {
-        UsersManager.login($scope.loginData)
-          .then(loginUser)
-          .catch(loginFail);
-      };
+    //Login function
+    $scope.login = function () {
+      UsersManager.getUser($scope.loginData)
+        .then(loginUser)
+        .catch(loginFail);
+    };
 
-      $scope.signup = function() {
-        if ($scope.userData.password === $scope.userData.password2) {
-          UsersManager.userExists($scope.userData.user)
-            .then(function(res) {
-              if (res) {
-                $scope.$parent.showAlert("", "Ya existe un usuario con ese nombre");
-              } else {
-                UsersManager.addUser($scope.userData).then(function(res) {
-                  $state.go("app.login");
-                });
-              }
-            });
-        } else {
-          $scope.$parent.showAlert("", "La contraseña no coincide");
-        }
-      };
-
-      function loginUser(response) {
-        if (response && response.userId) {
-          $rootScope.userId = response.userId;
-          $state.go("app.friends");
-        }
-      }
-
-      function loginFail(response) {
-        $scope.$parent.showAlert("", "Datos inválidos, intente nuevamente");
+    //Signup function
+    $scope.signup = function() {
+      if ($scope.userData.password === $scope.userData.password2) { //password must match
+        UsersManager.userExists($scope.userData.user)
+          .then(function(res) {
+            if (res) { //User exists
+              $scope.$parent.showAlert("", "Ya existe un usuario con ese nombre");
+            } else { //Add user to database
+              UsersManager.addUser($scope.userData).then(function(res) {
+                $state.go("app.login");
+              });
+            }
+          });
+      } else {
+        $scope.$parent.showAlert("", "La contraseña no coincide");
       }
     };
+
+    //Set userId on rootScope
+    function loginUser(response) {
+      if (response && response.userId) {
+        $rootScope.userId = response.userId;
+        $state.go("app.friends");
+      }
+    };
+
+    //Login fail callback
+    function loginFail(response) {
+      $scope.$parent.showAlert("", "Datos inválidos, intente nuevamente");
+    };
+  };
+
 })();

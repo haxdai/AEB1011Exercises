@@ -1,6 +1,8 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('Contacts', ['ionic', 'Contacts.controllers', 'ionic-material', 'ionMdInput', 'Contacts.services', 'ngCordova']);
+  //Main module definition
+  angular
+    .module('Contacts', ['ionic', 'Contacts.controllers', 'ionic-material', 'ionMdInput', 'Contacts.services', 'ngCordova']);
+
 })();
