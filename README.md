@@ -1,5 +1,5 @@
-# AEB1011 Exercises - ionic Boilerplate
-This branch contains a contacts app template using [ionicmaterial](http://ionicmaterial.com/) and the [ionic framework](http://ionicframework.com/).
+# AEB1011 Exercises - ionic sqlite
+This branch contains a contacts app using [ionicmaterial](http://ionicmaterial.com/) and the [ionic framework](http://ionicframework.com/). Storage is implemented using [ngCordova](http://ngcordova.com/) plugin and [$cordovaSQLite](http://ngcordova.com/docs/plugins/sqlite/) provider.
 
 # Getting started
 In order to work with this branch and start building your app you must first install and configure the following development tools.
