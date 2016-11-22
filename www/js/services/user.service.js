@@ -5,12 +5,12 @@
         .module('Contacts.services')
         .factory("UsersManager", UsersManager);
 
-    UsersManager.$inject = ["$http", "$q", "$crypto"];
-    function UsersManager ($http, $q, $crypto) {
-      var users = [{name:"haxdai", password:"gdyb21LQTcIANtvYMT7QVQ=="}];
+    UsersManager.$inject = ["$http", "$q", "$crypto", "$rootScope", "$cordovaSQLite"];
+    function UsersManager ($http, $q, $crypto, $rootScope, $cordovaSQLite) {
+      //var users = [{name:"haxdai", password:"gdyb21LQTcIANtvYMT7QVQ=="}];
 
       var factory = {
-        getUsers: getUsers,
+        userExists, userExists,
         addUser: addUser,
         removeUser: removeUser,
         login: login
@@ -18,30 +18,59 @@
 
       return factory;
 
-      function getUsers() {
-        return users;
+      function addUser(userInfo) {
+        var params = [userInfo.user, $crypto.hash(userInfo.password)],
+          deferred = $q.defer(),
+          query = "INSERT INTO users (name, password) VALUES (?,?)";
+        $cordovaSQLite.execute($rootScope.db, query, params)
+          .then(function(res) {
+            if (res && res.insertId) {
+              deferred.resolve(res);
+            }
+          })
+          .catch(function(res) {
+            deferred.reject(res);
+          });
+
+          return deferred.promise;
       };
 
-      function addUser(userInfo) {
-        userInfo.password = $crypto.hash(userInfo.password);
-        contacts.push(userInfo);
-      };
-      
       function removeUser(userId) {
 
       };
 
-      function login(username, password) {
-        var deferred = $q.defer(), pwdHash = $crypto.hash(password);
-        var usr = users.find(function(item) {
-          return item.password === pwdHash;
+      function userExists(username) {
+        var deferred = $q.defer(), query = "SELECT * FROM users WHERE name = ?";
+
+        $cordovaSQLite.execute($rootScope.db, query, [username]).then(function(res) {
+          if (res.rows.length > 0) {
+            deferred.resolve(res);
+          } else {
+            deferred.resolve();
+          }
+        })
+        .catch(function (res) {
+          deferred.resolve(res);
         });
 
-        if (usr) {
-          deferred.resolve();
-        } else {
-          deferred.reject();
-        }
+        return deferred.promise;
+      };
+
+      function login(userInfo) {
+        var params = [userInfo.user, $crypto.hash(userInfo.password)],
+          deferred = $q.defer(), query = "SELECT * FROM users WHERE name = ? AND password = ?";
+
+        $cordovaSQLite.execute($rootScope.db, query, params).then(function(res) {
+          if (res.rows.length > 0) {
+            deferred.resolve({userId: res.rows.item(0).id});
+          } else {
+            deferred.reject();
+          }
+        })
+        .catch(function (res) {
+          deferred.reject(res);
+        });
+
         return deferred.promise;
       };
     };

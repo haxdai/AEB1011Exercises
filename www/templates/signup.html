@@ -9,19 +9,20 @@
             <div class="list">
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Usuario</span>
-                    <input type="text" placeholder="Usuario">
+                    <input type="text" placeholder="Usuario" ng-model="userData.user">
                 </label>
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Password</span>
-                    <input type="password" placeholder="Password">
+                    <input type="password" placeholder="Password" ng-model="userData.password">
                 </label>
                 <label class="item item-input item-floating-label">
-                    <span class="input-label">Confirma password</span>
-                    <input type="password" placeholder="Confirmar password">
+                    <span class="input-label">Confirmar password</span>
+                    <input type="password" placeholder="Confirmar password" ng-model="userData.password2">
                 </label>
             </div>
             <div class="padding">
-                <button ui-sref="app.friends" class="button button-full button-balanced ink">Unirse</button>
+                <button ng-click="signup()" class="button button-full button-balanced ink">Unirse</button>
+                <button ui-sref="app.login" class="button button-full button-clear button-cancel ink">Cancelar</button>
             </div>
             <p class="login-footer">Ya tienes una cuenta? <a ui-sref="app.login">Inicia sesión aquí</a></p>
         </div>

@@ -126,6 +126,10 @@ p {
     color: #fff;
 }
 
+.login-content .button-cancel {
+  color: #fff;
+}
+
 .hero.no-header {
     padding-top: 60px;
     height: 150px;

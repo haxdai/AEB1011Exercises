@@ -1,6 +1,6 @@
 {
-  "name": "My Ionic App",
-  "short_name": "My Ionic App",
+  "name": "Contacts",
+  "short_name": "Contacts App",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

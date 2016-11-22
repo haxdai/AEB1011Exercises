@@ -5,8 +5,8 @@
         .module('Contacts.controllers')
         .controller('AppCtrl', AppController);
 
-    AppController.$inject = ["$scope", "$ionicModal", "$ionicPopover", "$timeout"];
-    function AppController($scope, $ionicModal, $ionicPopover, $timeout) {
+    AppController.$inject = ["$scope", "$ionicModal", "$ionicPopover", "$timeout", "$ionicPopup"];
+    function AppController($scope, $ionicModal, $ionicPopover, $timeout, $ionicPopup) {
         $scope.isExpanded = false;
         $scope.hasHeaderFabLeft = false;
         $scope.hasHeaderFabRight = false;
@@ -18,11 +18,6 @@
                 this.classList.toggle('active');
             });
         }
-
-        //Sets user logged status
-        $scope.setLogged = function(val) {
-          $scope.isLogged = val;
-        };
 
         //Hides top navbar for a particular view
         $scope.hideNavBar = function() {
@@ -104,6 +99,19 @@
                 //Remove buttons from DOM
                 fabs[0].remove();
             }
+        };
+
+        $scope.showAlert = function(title, msg) {
+          var alertPopup = $ionicPopup.alert({
+            title: title,
+            template: msg,
+            buttons: [
+              {
+                text: 'Aceptar',
+                type: 'button-positive'
+              }
+            ]
+          });
         };
     };
 })();

@@ -7,8 +7,6 @@
 
     FriendsController.$inject = ["$scope", "$stateParams", "$timeout", "ionicMaterialInk", "ionicMaterialMotion", "ContactsManager"];
     function FriendsController($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, ContactsManager) {
-      $scope.userData = {};
-
         //Calls showHeader from parent controller to show top navbar
         $scope.$parent.showHeader();
         //Calls clearFabs from parent controller to hide buttons in fabs
@@ -29,19 +27,6 @@
             // Set Ink
             ionicMaterialInk.displayEffect();
         }, 200);
-
-        $scope.register = function () {
-          console.log($scope.userData);
-          //$scope.userData.name="Carlos";
-          //console.log($scope.contacts[$scope.contacts.length].name);
-          ContactsManager.addContact($scope.userData);
-
-          //$scope.contacts[$scope.contacts.length][name]="Carlos";
-
-          //console.log($scope.contacts);
-          //var payload = {user: cc.username, password: $scope.password};
-          //console.log(payload);
-        };
     };
 
 })();

@@ -84,15 +84,15 @@
                 url: '/signup',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/register.html',
-                        controller: 'FriendsCtrl'
+                        templateUrl: 'templates/signup.html',
+                        controller: 'LoginCtrl'
                     },
                     'fabContent': {
                         template: ''
                     }
                 }
-            })
-            .state('app.profile', {
+            });
+            /*.state('app.profile', {
                 url: '/profile',
                 views: {
                     'menuContent': {
@@ -104,23 +104,34 @@
                         controller: function ($timeout) {
                             /*$timeout(function () {
                                 document.getElementById('fab-profile').classList.toggle('on');
-                            }, 800);*/
+                            }, 800);
                         }
                     }
                 }
-            });
+            });*/
         $urlRouterProvider.otherwise('/app/login');
     };
 
-    run.$inject = ["$ionicPlatform"];
-    function run($ionicPlatform) {
-        $ionicPlatform.ready(function() {
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            }
-            if (window.StatusBar) {
-                StatusBar.styleDefault();
-            }
-        });
+    run.$inject = ["$ionicPlatform", "$rootScope", "$cordovaSQLite"];
+    function run($ionicPlatform, $rootScope, $cordovaSQLite) {
+      $rootScope.userId = null;
+      $ionicPlatform.ready(function() {
+          if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+          }
+          if (window.StatusBar) {
+            StatusBar.styleDefault();
+          }
+
+          if (window.cordova && window.SQLitePlugin) {
+            $rootScope.db = $cordovaSQLite.openDB( {name:'contacts.db', location:'default'}, 1 );
+          } else {
+            $rootScope.db = window.openDatabase('contacts', '1.0', 'contacts.db', 100 * 1024 * 1024);
+          }
+          //$cordovaSQLite.execute($rootScope.db, "DROP TABLE contacts;");
+          //$cordovaSQLite.execute($rootScope.db, "DROP TABLE users;");
+          $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS contacts(id integer PRIMARY KEY, name text NOT NULL, email text NOT NULL, jobtitle text NOT NULL, picture text NOT NULL);");
+          $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS users(id integer PRIMARY KEY, name text NOT NULL, password text NOT NULL);");
+      });
     };
 })();

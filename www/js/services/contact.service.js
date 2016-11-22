@@ -5,9 +5,8 @@
         .module('Contacts.services')
         .factory("ContactsManager", ContactsManager);
 
-    ContactsManager.$inject = ["$http", "$q"];
-    function ContactsManager ($http, $q) {
-      var contacts = [{picture:"jon-snow.jpg", name: "Jon Snow", jobTitle:"Da illest illegitimate"}, {picture:"daenerys.jpg", name: "Daenerys Targaryen", jobTitle:"Dragon mommy"}, {picture:"jon-snow.jpg", name: "Jon Snow", jobTitle:"Da illest illegitimate"}];
+    ContactsManager.$inject = ["$rootScope", "$http", "$q", "$cordovaSQLite"];
+    function ContactsManager ($rootScope, $http, $q, $cordovaSQLite) {
 
       var factory = {
         getContacts: getContacts,
@@ -18,15 +17,34 @@
       return factory;
 
       function getContacts() {
-        return contacts;
+        var deferred = $q.defer(), query = "SELECT * FROM contacts";
+
+        $cordovaSQLite.execute($rootScope.db, query, []).then(function(res) {
+            var result = getAllContacts(res);
+            deferred.resolve(result);
+        })
+        .catch(function (res) {
+          deferred.resolve(res);
+        });
+
+        return deferred.promise;
       };
 
       function addContact(contactInfo) {
-        contacts.push(contactInfo);
+
       };
 
       function removeContact(contactId) {
 
+      };
+
+      function getAllContacts(result) {
+        var ret = [];
+        for (var i = 0; i < result.rows.length; i++) {
+          ret.push(result.rows.item(i));
+        }
+
+        return ret;
       };
     };
 })();
