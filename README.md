@@ -16,10 +16,12 @@ The following branches are provided, the README file on each branch describes br
 |[REST-operations-contacts-2](https://github.com/haxdai/AEB1011Exercises/tree/REST-operations-contacts-2)|Contacts create/update operations using jQuery to send AJAX requests to a REST API|
 |[REST-operations-contacts-3](https://github.com/haxdai/AEB1011Exercises/tree/REST-operations-contacts-3)|Contacts delete operation using jQuery to send AJAX requests to a REST API|
 |[ionic-bilerplate](https://github.com/haxdai/AEB1011Exercises/tree/ionic-bolierplate)|Ionic app boilerplate|
+|[ionic-template](https://github.com/haxdai/AEB1011Exercises/tree/ionic-template)|Starter template for contacts app using ionicmaterial|
+|[ionic-sqlite](https://github.com/haxdai/AEB1011Exercises/tree/ionic-sqlite)|Contacts app using sqlite services for storage|
 
 ##Using this repository
 ###Git
-If you have github installed on your computer, you can just clone the repo and switch to the branch you want to work on. 
+If you have github installed on your computer, you can just clone the repo and switch to the branch you want to work on.
 
 To clone the repo:
 
