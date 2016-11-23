@@ -1,3 +1,6 @@
+/**
+* App controller for login view
+*/
 (function() {
   'use strict';
 

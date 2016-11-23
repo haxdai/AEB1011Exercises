@@ -1,3 +1,6 @@
+/**
+* Service to manage users with SQLite persistence
+*/
 (function() {
   'use strict';
 

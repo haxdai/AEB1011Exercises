@@ -1,3 +1,6 @@
+/**
+* App controller for contacts management
+*/
 (function() {
   'use strict';
 

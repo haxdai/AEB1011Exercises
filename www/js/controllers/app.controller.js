@@ -1,3 +1,6 @@
+/**
+* MAin app controller. Contains functions and variables used in all controllers.
+*/
 (function() {
   'use strict';
 

@@ -1,3 +1,6 @@
+/**
+* Module to group app services
+*/
 (function() {
   'use strict';
 

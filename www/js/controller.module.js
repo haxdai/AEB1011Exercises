@@ -1,3 +1,6 @@
+/**
+* Module to group app controllers
+*/
 (function() {
   'use strict';
 

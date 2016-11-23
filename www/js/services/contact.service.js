@@ -1,3 +1,6 @@
+/**
+* Service to manage user contacts with SQLite persistence
+*/
 (function() {
   'use strict';
 
@@ -56,6 +59,6 @@
 
       return ret;
     };
+  };
 
-    };
 })();

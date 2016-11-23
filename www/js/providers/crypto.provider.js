@@ -1,3 +1,6 @@
+/**
+* Service provider for cryptographic tasks
+*/
 (function () {
   'use strict';
 
